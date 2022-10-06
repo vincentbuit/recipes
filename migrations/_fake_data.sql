@@ -2,7 +2,6 @@ INSERT INTO tag (name) VALUES
     ( "Vegetarisch" ),
     ( "Italiaans" );
 
-
 INSERT INTO ingredient (name, unit) VALUES 
     ( "Rijst", "gram" ),
     ( "Ei", null ),
