@@ -6,7 +6,7 @@
 - [DONE] Access it from shellscript
 - [DONE] Init db basic script
 - [DONE] Create model
-- Add optionally test data
+- [DONE] Add optionally test data
 - Create basic shell script
 - Display recipe function shell script
 - Search function shell script with fzf
