@@ -13,11 +13,6 @@ CREATE TABLE tag_mapping (
     tag_id INTEGER NOT NULL
 );
 
-CREATE TABLE ingredient_mapping (
-    recipe_id INTEGER NOT NULL,
-    recipe_ingredient_id INTEGER NOT NULL
-);
-
 CREATE TABLE ingredient (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
