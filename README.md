@@ -11,7 +11,7 @@
 - [DONE] Create basic shell script and project structure
 - [DONE] Make all sql queries and scripts work
 - [DONE] Make search function work
-- Integrate fzf correctly
+- [DONE] Integrate fzf correctly
 - Add Makefile
 - Add new recipes to sqlite
 - Auto return and print ID's of newly created entries
