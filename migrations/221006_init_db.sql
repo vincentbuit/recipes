@@ -30,7 +30,7 @@ CREATE TABLE recipe_ingredient (
 CREATE TABLE recipe (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     name TEXT NOT NULL,
-    category INTEGER,
+    category_id INTEGER,
     prep_time INTEGER,
     cook_time INTEGER,
     servings INTEGER NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE recipe (
     description TEXT,
     rating REAL CHECK(rating >= 0 AND rating <= 5),
     source TEXT,
-    FOREIGN KEY(category) REFERENCES category(id)
+    FOREIGN KEY(category_id) REFERENCES category(id)
 );
 
 INSERT INTO category (name) VALUES 

@@ -1,6 +1,6 @@
 UPDATE recipe
 SET name = "Pannenkoeken", 
-    category = 3,
+    category_id = 3,
     prep_time = 5,
     cook_time = 30,
     servings = 1,

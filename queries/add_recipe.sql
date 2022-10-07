@@ -1,6 +1,6 @@
 INSERT INTO recipe (
     name, 
-    category,
+    category_id,
     prep_time,
     cook_time,
     servings,
