@@ -1,6 +1,5 @@
 #!/bin/sh
-set -eux
-
+set -eu
 DB="recipes.db"
 
 # FUNCTIONS -------------------------------------------------------------------
@@ -9,39 +8,8 @@ die() {
 }
 
 # SUBCOMMANDS -----------------------------------------------------------------
-add_recipe_to_db() {
-    echo "test";
-    # execute a sql file
-}
-
-add_ingredients_to_db() {
-    echo "test";
-    # execute a sql file
-}
-
-delete_ingredients_from_db() {
-    echo "test";
-    # execute a sql file
-}
-
-delete_recipe_db() {
-    echo "test";
-    # execute a sql file
-}
-
-edit_ingredients_from_db() {
-    echo "test";
-    # execute a sql file
-}
-
-edit_recipe_db() {
-    echo "test";
-    # execute a sql file
-}
-
 get_recipes_from_db() {
-    echo "test";
-    # execute a sql file
+    cat ./queries/get_recipes.sql | sqlite3 $DB
 }
 
 init_db() {
@@ -55,67 +23,34 @@ init_db() {
     fi
 }
 
-read_db () {
-    sqlite3 $DB "SELECT * FROM recipe;"
-}
-
 # MAIN ------------------------------------------------------------------------
 case "$1" in
-add)
-    case "$2" in
-    ingredients)
-        # Add ingredients
-        shift;
-        add_ingredients_to_db "$@"
-        ;;
-    recipe)
-        # Add recipe
-        shift;
-        add_recipe_to_db "$@"
-        ;;
-    *)
-        die "ERROR: unknown command $1"
-        ;;
-    esac
-    ;;
-delete)
-    case "$2" in
-    ingredients)
-        # Delete ingredients
-        shift;
-        delete_ingredients_from_db "$@"
-        ;;
-    recipe)
-        # Delete recipe
-        shift;
-        delete_recipe_db "$@"
-        ;;
-    *)
-        die "ERROR: unknown command $1"
-        ;;
-    esac
-    ;;
-edit)
-    case "$2" in
-    ingredients)
-        # Edit ingredients
-        shift;
-        edit_ingredients_from_db "$@"
-        ;;
-    recipe)
-        # Edit recipe
-        shift;
-        edit_recipe_db "$@"
-        ;;
-    *)
-        die "ERROR: unknown command $1"
-        ;;
-    esac
+help)
+    # Print help message
+    echo "Insert the required data into the query files."
+    echo "Execute in the following order:"
+    echo "- Check whether ingredients are new by simply searching: 'recipes SEARCHNAME'"
+    echo "- Add new ingredients, recipes and tags"
+    echo "- Lookup ID's of recipes, ingredients and tags using search"
+    echo "- Add mapping_ingredient (recipe ingredient with recipe)"
+    echo "- Add mapping_tag (recipe with tag)"
     ;;
 init)
     # Init DB
     shift;
     init_db "$@"
+    ;;
+run)
+    # Run query
+    shift
+    if [ $# -eq 0 ]
+    then
+        echo "please provide query filename without extension"
+    else
+        echo "executing query"
+        QUERY="./queries/${1}.sql"
+        cat $QUERY | sqlite3 $DB
+    fi
     ;;
 *)
     # Get all recipes from db and search
