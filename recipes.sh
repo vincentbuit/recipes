@@ -9,7 +9,7 @@ die() {
 
 # SUBCOMMANDS -----------------------------------------------------------------
 get_recipes_from_db() {
-    cat ./queries/get_recipes.sql | sqlite3 $DB
+    cat ./queries/get_recipes.sql | sqlite3 $DB | fzf
 }
 
 init_db() {
