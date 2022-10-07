@@ -9,7 +9,22 @@ die() {
 
 # SUBCOMMANDS -----------------------------------------------------------------
 get_recipes_from_db() {
-    cat ./queries/get_recipes.sql | sqlite3 $DB | fzf
+    RESULT="$(cat ./queries/get_recipes.sql | sqlite3 $DB | fzf-tmux)" 
+    ID="$(echo $RESULT | awk -F "|" '{print $1}')"
+    QUERY="
+        SELECT 
+            name, 
+            prep_time,
+            cook_time,
+            servings,
+            intro,
+            description,
+            rating,
+            source
+        FROM recipe
+        WHERE id=${ID}
+    "
+    echo $QUERY | sqlite3 $DB
 }
 
 init_db() {
@@ -24,7 +39,7 @@ init_db() {
 }
 
 # MAIN ------------------------------------------------------------------------
-case "$1" in
+case "${1-default}" in
 help)
     # Print help message
     echo "Insert the required data into the query files."
@@ -54,8 +69,6 @@ run)
     ;;
 *)
     # Get all recipes from db and search
-    get_recipes_from_db "$@"
-    # lijst met recipes zoekbaar op naam, tags, category, ingredients | fzf
-    shift;
+    get_recipes_from_db
     ;;
 esac
